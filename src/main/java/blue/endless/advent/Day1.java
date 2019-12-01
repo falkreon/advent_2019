@@ -12,7 +12,7 @@ public class Day1 {
 	/**
 	 * Apply the AoC day 1 rocket equation recursively to the mass to find the final launch mass.
 	 * @param mass The initial module mass that needs to be launched
-	 * @return The final launch mass of modules plus fuel required to launch them.
+	 * @return The final fuel mass required to launch the given payload mass
 	 */
 	public static int rocketEquation(int mass) {
 		
