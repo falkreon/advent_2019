@@ -4,8 +4,8 @@ group = "blue.endless";
 archivesBaseName = "AdventOfCode2019";
 version = "0.0.1";
 
-sourceCompatibility = 1.10;
-targetCompatibility = 1.10;
+sourceCompatibility = 1.8;
+targetCompatibility = 1.8;
 
 repositories {
 	jcenter()

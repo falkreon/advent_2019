@@ -28,6 +28,8 @@ public class Day2 {
 			int aAddr = tape.get(offset+1);
 			int bAddr = tape.get(offset+2);
 			int dstAddr = tape.get(offset+3);
+			growTape(tape, aAddr);
+			growTape(tape, bAddr);
 			int a = tape.get(aAddr);
 			int b = tape.get(bAddr);
 			growTape(tape, dstAddr);
@@ -42,6 +44,8 @@ public class Day2 {
 			int aAddr = tape.get(offset+1);
 			int bAddr = tape.get(offset+2);
 			int dstAddr = tape.get(offset+3);
+			growTape(tape, aAddr);
+			growTape(tape, bAddr);
 			int a = tape.get(aAddr);
 			int b = tape.get(bAddr);
 			growTape(tape, dstAddr);
@@ -70,11 +74,8 @@ public class Day2 {
 	public static void execFully(List<Integer> tape) throws RuntimeException {
 		int offset = 0;
 		while(exec(tape, offset)) {
-			System.out.println("Executing: "+tape);
 			offset += 4;
 		}
-		
-		System.out.println("Complete: "+tape); // Java has really nice List.toString implementations
 	}
 	
 	public static void growTape(List<Integer> tape, int neededPos) {
@@ -95,5 +96,39 @@ public class Day2 {
 		}
 		
 		return result;
+	}
+	
+	
+	
+	/* ********************************************************************************************
+	 * # Part 2
+	 * 
+	 * While there is a tower of self-referential instructions (which write to their own output
+	 * address) creates a seemingly ignoreable section in the middle of the program, the output
+	 * of that section is then referenced. So:
+	 * 
+	 * - Parsing the program seems to be out of the question
+	 * - The program inherently destroys its destination addresses, so it's irreversible
+	 * - The only solution seems to be brute-forcing
+	 * 
+	 * ********************************************************************************************/
+	
+	public static void findAnswer(List<Integer> tape, int desiredResult) {
+		
+		for(int a=0; a<10000; a++) {
+			for(int b=0; b<10000; b++) {
+				ArrayList<Integer> copy = new ArrayList<>(tape);
+				copy.set(1, a);
+				copy.set(2, b);
+				execFully(copy);
+				if (copy.get(0).equals(desiredResult)) {
+					System.out.println("Solution found: "+a+", "+b+" >> "+(100*a+b));
+					return;
+				}
+			}
+			System.out.println(".");
+		}
+		
+		
 	}
 }

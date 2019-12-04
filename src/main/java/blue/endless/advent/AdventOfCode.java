@@ -3,7 +3,6 @@ package blue.endless.advent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 
 public class AdventOfCode {
@@ -31,7 +30,7 @@ public class AdventOfCode {
 			break;
 		
 		case "2":
-		case "programalarm":
+		case "programalarm": {
 			//List<Integer> data = Arrays.asList(1,1,1,4,99,5,6,0,99);
 			List<String> data;
 			try {
@@ -44,12 +43,35 @@ public class AdventOfCode {
 				
 				Day2.execFully(tape);
 				
+				System.out.println("Complete: "+tape);
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-			
-			
+			break;
+		}
+		case "2b": {
+			List<String> data;
+			try {
+				data = Files.readAllLines(Paths.get("intcode.txt"));
+				List<Integer> tape = Day2.decode(data.get(0));
+				
+				Day2.findAnswer(tape, 19690720);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
+		}
+		
+		case "wires":
+		case "3": {
+			Day3.runFromFile();
+			break;
+		}
+		case "3b": {
+			Day3.runGraph();
+		}
 			
 		}
 		
