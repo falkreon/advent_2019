@@ -1,7 +1,6 @@
 package blue.endless.advent;
 
 import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

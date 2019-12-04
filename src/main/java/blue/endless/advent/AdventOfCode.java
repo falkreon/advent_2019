@@ -71,8 +71,19 @@ public class AdventOfCode {
 		}
 		case "3b": {
 			Day3.runGraph();
+			break;
 		}
-			
+		
+		case "4": {
+			int count = Day4.permutations(172851, 675869);
+			System.out.println("Permutation count: "+count);
+			break;
+		}
+		case "4b": {
+			int count = Day4.partTwoPermutations(172851, 675869);
+			System.out.println("Permutation count: "+count);
+			break;
+		}
 		}
 		
 		
