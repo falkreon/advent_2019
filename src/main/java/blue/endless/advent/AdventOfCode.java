@@ -84,6 +84,15 @@ public class AdventOfCode {
 			System.out.println("Permutation count: "+count);
 			break;
 		}
+		
+		case "5": {
+			Day5.runFromFile(1);
+			break;
+		}
+		case "5b": {
+			Day5.runFromFile(5);
+			break;
+		}
 		}
 		
 		
