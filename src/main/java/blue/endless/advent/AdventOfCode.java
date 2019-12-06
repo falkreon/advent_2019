@@ -93,6 +93,14 @@ public class AdventOfCode {
 			Day5.runFromFile(5);
 			break;
 		}
+		
+		case "6": {
+			Day6.runFromFile();
+			break;
+		}
+		case "6b": {
+			Day6.runTransfer();
+		}
 		}
 		
 		
