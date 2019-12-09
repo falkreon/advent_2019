@@ -100,6 +100,20 @@ public class AdventOfCode {
 		}
 		case "6b": {
 			Day6.runTransfer();
+			break;
+		}
+		
+		case "7": {
+			Day7.runFromFile();
+			break;
+		}
+		case "7b": {
+			Day7.runResonantFromFile();
+			break;
+		}
+		
+		case "8": {
+			break;
 		}
 		}
 		

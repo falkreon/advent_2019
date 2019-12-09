@@ -227,6 +227,10 @@ public class Day5 {
 		}
 		
 		public void run() {
+			run(true);
+		}
+		
+		public void run(boolean verbose) {
 			while(!state.isHalted()) {
 				int opcodeAndMode = state.memory[state.programCounter];
 				int opcodeNum = opcodeAndMode % 100;
@@ -241,12 +245,12 @@ public class Day5 {
 					opcode.run(state);
 				}
 				
-				System.out.println(state.lineDisassembly);
+				if (verbose) System.out.println(state.lineDisassembly);
 			}
 			
 			if (!state.error.isEmpty()) System.out.println("Error: "+state.error);
-			if (!state.output.isEmpty()) System.out.println("Final output: "+state.output);
-			System.out.println("Final memory state: "+Arrays.toString(state.memory));
+			if (verbose && !state.output.isEmpty()) System.out.println("Final output: "+state.output);
+			if (verbose) System.out.println("Final memory state: "+Arrays.toString(state.memory));
 		}
 	}
 	
