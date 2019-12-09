@@ -113,7 +113,11 @@ public class AdventOfCode {
 		}
 		
 		case "8": {
+			Day8.runFromFile();
 			break;
+		}
+		case "8b": {
+			Day8.decodeFromFile();
 		}
 		}
 		
