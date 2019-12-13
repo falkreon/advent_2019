@@ -189,10 +189,27 @@ public class AdventOfCode {
 			break;
 		}
 		
+		case "13": {
+			Day13.run(loadFile("day13.dat"));
+			break;
+		}
+		case "13b": {
+			Day13.runInteractive(loadFile("day13.dat"));
+			break;
+		}
+		
+		
 		}
 	}
 	
 	
-	
-	
+	// Made this all the way out at day 13. No idea why it took me this long.
+	public static List<String> loadFile(String filename) throws RuntimeException {
+		try {
+			List<String> file = Files.readAllLines(Paths.get(filename));
+			return file;
+		} catch (IOException ex) {
+			throw new RuntimeException(ex);
+		}
+	}
 }
