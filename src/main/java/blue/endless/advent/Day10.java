@@ -4,12 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-
-import javax.annotation.Nullable;
 
 public class Day10 {
 	
@@ -400,5 +396,136 @@ public class Day10 {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	/*
+	 * Dispute resolution: The best way I can think of to determine, for certain, if one or the other
+	 * (atan2 or bresenham) approach is correct, is a third approach, wherein the slope to each asteroid
+	 * is kept in rational form and compared against another slope by converting to least common divisor.
+	 * 
+	 * This will allow us to determine colinear asteroids with full (infinite) precision.
+	 * 
+	 * 
+	 * 
+	 */
+	
+	/** Returns the greatest common divisor (factor) of positive integers a and b
+	 * <p>Source: https://en.wikipedia.org/wiki/Binary_GCD_algorithm
+	 */
+	public static int gcdUnsigned(int u, int v) {
+		// simple cases (termination)
+		if (u == v) return u;
+		if (u == 0) return v;
+		if (v == 0) return u;
+
+		// look for factors of 2
+		if ((u&1)==0) { // u is even
+			if ((v&1)==1) { // v is odd
+				return gcdUnsigned(u >> 1, v);
+			} else { // both u and v are even
+				return gcdUnsigned(u >> 1, v >> 1) << 1;
+			}
+		}
+		if ((v&1)==0) {// u is odd, v is even
+			return gcdUnsigned(u, v >> 1);
+		}
+		// reduce larger argument
+		if (u > v)
+			return gcdUnsigned((u - v) >> 1, v);
+
+		return gcdUnsigned((v - u) >> 1, u);
+	}
+	
+	/** Handles the one additional case for fractions which potentially have -1 as a factor */
+	public static int gcd(int a, int b) {
+		int gcd = gcdUnsigned(Math.abs(a), Math.abs(b));
+		if (a<0 && b<0) { //-1 is also a common factor
+			return -gcd;
+		} else {
+			return gcd;
+		}
+	}
+	
+	/**
+	 * Returns the least common multiple of integer divisors a and b
+	 * <p>Source: https://en.wikipedia.org/wiki/Least_common_multiple#Using_the_greatest_common_divisor
+	 */
+	public static int lcm(int a, int b) {
+		return Math.abs(a*b) / gcd(a, b);
+	}
+	
+	public static boolean areFractionsEqual(int n1, int d1, int n2, int d2) {
+		int lcm = lcm(d1, d2);
+		//LCM will never be zero, but if it is, that's exceptional enough to throw divideByZero here.
+		
+		int scale1 = lcm/d1;
+		int scale2 = lcm/d2;
+		
+		int tn1 = n1*scale1;
+		int tn2 = n2*scale2;
+		
+		return tn1==tn2; //When converted to the same bases, the numerators should be equal.
+	}
+	
+	public static class PerfectDetection {
+		public Point2i asteroid;
+		
+		/* Note: This is not rise-over-run! It's x/y */
+		public int numerator;
+		public int denominator;
+		
+		public PerfectDetection(Point2i asteroid, int dx, int dy) {
+			this.asteroid = asteroid;
+			this.numerator = dx;
+			this.denominator = dy;
+			reduceFraction();
+		}
+		
+		//Takes this asteroid's fraction and reduces it
+		public void reduceFraction() {
+			int gcd = gcd(numerator, denominator);
+			if (gcd==1 || gcd==-1) return; //Already reduced
+			
+			numerator /= gcd;
+			denominator /= gcd;
+		}
+	}
+	
+	public List<PerfectDetection> allAsteroids(AsteroidField field, int x, int y) {
+		ArrayList<PerfectDetection> result = new ArrayList<>();
+		for(Point2i point: field.asteroids) {
+			PerfectDetection cur = new PerfectDetection(point, point.x-x, point.y-y);
+		}
+		
+		return null;
+	}
+	
+	public static void runDisputeResolution() {
+		
+		String[] testInput = {
+			".#..##.###...#######",
+			"##.############..##.",
+			".#.######.########.#",
+			".###.#######.####.#.",
+			"#####.##.#.##.###.##",
+			"..#####..#.#########",
+			"####################",
+			"#.####....###.#.#.##",
+			"##.#################",
+			"#####.##.###..####..",
+			"..######..##.#######",
+			"####.##.####...##..#",
+			".#####..#.######.###",
+			"##...#.##########...",
+			"#.##########.#######",
+			".####.#.###.###.#.##",
+			"....##.##.###..#####",
+			".#.#.###########.###",
+			"#.#.#.#####.####.###",
+			"###.##.####.##.#..##"
+			};
+		AsteroidField field = new AsteroidField(testInput);
+		
+		System.out.println(gcd(-3, -6));
 	}
 }

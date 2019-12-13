@@ -163,10 +163,33 @@ public class AdventOfCode {
 		}
 		case "10b": {
 			Day10.runPartTwoFromFile();
-		}
+			break;
 		}
 		
+		case "10dispute": {
+			Day10.runDisputeResolution();
+			break;
+		}
 		
+		case "11": {
+			Day11.runFromFile();
+			break;
+		}
+		case "11b": {
+			Day11.runPartTwoFromFile();
+			break;
+		}
+		
+		case "12": {
+			Day12.runFromFile();
+			break;
+		}
+		case "12b": {
+			Day12.runPartTwoFromFile();
+			break;
+		}
+		
+		}
 	}
 	
 	
