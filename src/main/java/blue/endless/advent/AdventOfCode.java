@@ -198,7 +198,14 @@ public class AdventOfCode {
 			break;
 		}
 		
-		
+		case "14": {
+			Day14.run(loadFile("day14.dat"));
+			break;
+		}
+		case "14b": {
+			Day14.runPartTwo(loadFile("day14.dat"));
+			break;
+		}
 		}
 	}
 	
