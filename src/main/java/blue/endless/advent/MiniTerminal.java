@@ -34,6 +34,14 @@ public class MiniTerminal extends JFrame {
 	public boolean downPressed = false;
 	
 	public MiniTerminal() {
+		this(45,22);
+	}
+	
+	public MiniTerminal(int width, int height) {
+		this.width = width;
+		this.height = height;
+		this.chars = new char[width*height];
+		this.fg = new int[width*height];
 		Arrays.fill(fg, 0xFF_FFFFFF);
 		Arrays.fill(chars, ' ');
 		this.setMinimumSize(new Dimension(width*cw+xofs, height*ch+yofs+20));

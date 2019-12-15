@@ -206,6 +206,15 @@ public class AdventOfCode {
 			Day14.runPartTwo(loadFile("day14.dat"));
 			break;
 		}
+		
+		case "15": {
+			Day15.runInteractive();
+			break;
+		}
+		case "15b": {
+			Day15.runPartTwo();
+			break;
+		}
 		}
 	}
 	
