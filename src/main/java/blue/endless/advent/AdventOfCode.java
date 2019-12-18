@@ -215,6 +215,20 @@ public class AdventOfCode {
 			Day15.runPartTwo();
 			break;
 		}
+		
+		case "16": {
+			Day16.run();
+			break;
+		}
+		case "16b": {
+			Day16.runPartTwo();
+			break;
+		}
+		
+		case "17": {
+			Day17.run();
+			break;
+		}
 		}
 	}
 	
